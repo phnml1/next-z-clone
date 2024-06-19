@@ -4,7 +4,7 @@ import cors from 'cors';
 import { handlers } from './handlers';
 
 const app = express();
-const port = 9090; // 서버 포트
+const port = 9090;
 
 app.use(cors({ origin: 'http://localhost:3000', optionsSuccessStatus: 200, credentials: true }));
 app.use(express.json());
