@@ -10,6 +10,7 @@ import TabProvider from "./_component/TabProvider";
 import style from "./home.module.css";
 import { getPostRecommends } from "./_lib/getPostRecommends";
 import PostRecommends from '@/app/(afterLogin)/home/_component/PostRecommends'
+import TabDecider from "./_component/TabDecider";
 // 서버 컴포넌트이기 때문에 이 함수는 서버에서 실행된다.
 
 
@@ -29,6 +30,7 @@ export default async function Home() {
         <TabProvider>
           <Tab />
           <PostForm />
+          <TabDecider />
           <PostRecommends />
         </TabProvider>
       </HydrationBoundary>
