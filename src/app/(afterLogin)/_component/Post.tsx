@@ -7,35 +7,19 @@ import ActionButtons from "@/app/(afterLogin)/_component/ActionButtons";
 import PostArticle from "@/app/(afterLogin)/_component/PostArticle";
 import {faker} from '@faker-js/faker';
 import PostImages from './PostImages';
-// import PostImages from "@/app/(afterLogin)/_component/PostImages";
+import {Post as IPost} from "@/model/Post";
+import { MouseEventHandler } from 'react';
 
 dayjs.locale('ko');
 dayjs.extend(relativeTime)
 
 type Props = {
   noImage?: boolean
+  post: IPost
 }
-export default function Post({ noImage }: Props) {
-  const target = {
-    postId: 1,
-    User: {
-      id: 'elonmusk',
-      nickname: 'Elon Musk',
-      image: '/yRsRRjGO.jpg',
-    },
-    content: '클론코딩 라이브로 하니 너무 힘들어요 ㅠㅠ',
-    createdAt: new Date(),
-    Images: [] as any[],
-  }
-  if (Math.random() > 0.5 && !noImage) {
-    target.Images.push(
-      {imageId: 1, link: faker.image.urlLoremFlickr()},
-      {imageId: 2, link: faker.image.urlLoremFlickr()},
-      {imageId: 3, link: faker.image.urlLoremFlickr()},
-      {imageId: 4, link: faker.image.urlLoremFlickr()},
-    )
-  }
-
+export default function Post({ noImage,post }: Props) {
+  const target = post;
+  console.log('post');
   return (
     /**클라이언트 안에 자식으로 서버컴포넌트 일 때는 ㄱㅊ 대신 import는 x **/
     <PostArticle post={target}>
