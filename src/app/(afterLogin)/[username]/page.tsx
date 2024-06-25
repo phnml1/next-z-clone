@@ -1,9 +1,9 @@
-import UserInfo from './_component/UserInfo';
-import UserPosts from './_component/UserPosts';
-import { getUser } from './_lib/getUser';
-import { getUserPosts } from './_lib/getUserPosts';
 import style from './profile.module.css';
 import {dehydrate, HydrationBoundary, QueryClient} from "@tanstack/react-query";
+import UserPosts from "@/app/(afterLogin)/[username]/_component/UserPosts";
+import UserInfo from "@/app/(afterLogin)/[username]/_component/UserInfo";
+import {getUser} from "@/app/(afterLogin)/[username]/_lib/getUser";
+import {getUserPosts} from "@/app/(afterLogin)/[username]/_lib/getUserPosts";
 
 type Props = {
   params: { username: string },
@@ -20,7 +20,7 @@ export default async function Profile({params}: Props) {
       <HydrationBoundary state={dehydratedState}>
         <UserInfo username={username} />
         <div>
-        <UserPosts username={username} />
+          <UserPosts username={username} />
         </div>
       </HydrationBoundary>
     </main>
