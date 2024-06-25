@@ -13,13 +13,14 @@ import PostRecommends from '@/app/(afterLogin)/home/_component/PostRecommends'
 import TabDecider from "./_component/TabDecider";
 // 서버 컴포넌트이기 때문에 이 함수는 서버에서 실행된다.
 
-
+// src\app\(afterLogin)\home\page.tsx
 export default async function Home() {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery({
+  await queryClient.prefetchInfiniteQuery({
     queryKey: ["posts", "recommends"],
     queryFn: getPostRecommends,
+    initialPageParam: 0,
   });
   const dehydratedstate = dehydrate(queryClient);
 
