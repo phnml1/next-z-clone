@@ -11,30 +11,23 @@ import style from "./home.module.css";
 import { getPostRecommends } from "./_lib/getPostRecommends";
 import PostRecommends from '@/app/(afterLogin)/home/_component/PostRecommends'
 import TabDecider from "./_component/TabDecider";
+import TabDeciderSuspense from "./_component/TabDeciderSuspense";
+import { Suspense } from "react";
+import Loading from "./loading";
 // 서버 컴포넌트이기 때문에 이 함수는 서버에서 실행된다.
 
 // src\app\(afterLogin)\home\page.tsx
 export default async function Home() {
-  const queryClient = new QueryClient();
-
-  await queryClient.prefetchInfiniteQuery({
-    queryKey: ["posts", "recommends"],
-    queryFn: getPostRecommends,
-    initialPageParam: 0,
-  });
-  const dehydratedstate = dehydrate(queryClient);
-
   return (
     <main className={style.main}>
-      {/* 4버전에서는 hydrate였지만 5버전에서는 Hyderation Boundary로 변경됨. */}
-      <HydrationBoundary state={dehydratedstate}>
+    
         <TabProvider>
           <Tab />
           <PostForm />
-          <TabDecider />
-          <PostRecommends />
+          <Suspense fallback = {<Loading/>}>
+          <TabDeciderSuspense />
+          </Suspense>
         </TabProvider>
-      </HydrationBoundary>
     </main>
   );
 }
