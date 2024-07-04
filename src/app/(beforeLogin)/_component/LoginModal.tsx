@@ -2,7 +2,7 @@
 
 import style from '@/app/(beforeLogin)/_component/login.module.css';
 import {ChangeEventHandler, FormEventHandler, useState} from "react";
-import { useRouter } from 'next/navigation'
+import {redirect, useRouter} from "next/navigation";
 import {signIn} from "next-auth/react";
 
 export default function LoginModal() {
@@ -14,18 +14,22 @@ export default function LoginModal() {
   const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     setMessage('');
-    try {
-      const result = await signIn("credentials", {
+    await signIn("credentials", {
         username: id,
-        password,
-        redirect: false,
+        password: password,
+        redirect: false, // true로 할 경우 서버에서 리다이렉트 되므로 클라이언트 컴포넌트에서는 false로 설정 후 router.replace() 사용
       })
-      console.log(result);
-      router.replace('/home');
-    } catch (err) {
-      console.error(err);
-      setMessage('아이디와 비밀번호가 일치하지 않습니다.');
-    }
+        .then((response) => {
+          if (response?.error) {
+            setMessage("아이디와 비밀번호가 일치하지 않습니다.");
+          } else {
+            router.replace("/home");
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+          setMessage("아이디와 비밀번호가 일치하지 않습니다.");
+        });
   };
   const onClickClose = () => {
     router.back();

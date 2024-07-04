@@ -1,6 +1,6 @@
 // src\app\(afterLogin)\home\_lib\getFollowingPosts.ts
 export async function getFollowingPosts() {
-  const res = await fetch(`http://localhost:9090/api/followingPosts`, {
+  const res = await fetch(`http://localhost:9090/api/posts/followings`, {
     next: {
       tags: ["posts", "followings"],
     },
