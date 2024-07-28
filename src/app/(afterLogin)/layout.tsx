@@ -20,6 +20,7 @@ export default async function AfterLoginLayout({ children, modal }: Props) {
   const session = await auth();
   return (
     <div className={style.container}>
+       <RQProvider>
       <header className={style.leftSectionWrapper}>
         <section className={style.leftSection}>
           <div className={style.leftSectionFixed}>
@@ -43,7 +44,7 @@ export default async function AfterLoginLayout({ children, modal }: Props) {
           </div>
         </section>
       </header>
-      <RQProvider>
+     
       <div className={style.rightSectionWrapper}>
         <div className={style.rightSectionInner}>
           <main className={style.main}>{children}</main>

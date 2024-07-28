@@ -1,10 +1,9 @@
-// src\app\(afterLogin)\[username]\_lib\getUser.ts
+// src\app\(afterLogin)\[username]\_lib\getUserServer.ts
 import { QueryFunction } from "@tanstack/query-core";
 import { User } from "@/model/User";
+import { cookies } from "next/headers";
 
-export const getUser: QueryFunction<User, [_1: string, _2: string]> = async ({
-  queryKey,
-}) => {
+export const getUserServer = async ( {queryKey}: {queryKey: [string,string] }) => {
   const [_1, username] = queryKey;
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/users/${username}`,
@@ -13,6 +12,9 @@ export const getUser: QueryFunction<User, [_1: string, _2: string]> = async ({
         tags: ["users", username],
       },
       credentials: "include",
+      headers: {
+        Cookie: cookies().toString(),
+      },
       cache: "no-store",
     }
   );

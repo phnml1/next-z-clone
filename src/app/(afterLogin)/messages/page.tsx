@@ -1,5 +1,11 @@
 import style from './message.module.css';
 import Room from "./_component/Room";
+import { Metadata } from 'next/types';
+
+export const metadata: Metadata = {
+  title: '쪽지 / Z',
+  description: '탐색해보세요.',
+}
 
 export default function Home() {
   return (

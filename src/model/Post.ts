@@ -1,7 +1,7 @@
 import { PostImage } from "./PostImage";
 import { User } from "./User";
 
-interface UserID {
+interface UserId {
   userId: string,
 }
 
@@ -10,15 +10,15 @@ export interface Post {
   User: User;
   content: string;
   createdAt: Date;
-  Images: PostImage[],
-  Hearts: UserID[],
-  Reposts: UserID[],
-  Comments: UserID[],
+  Images: PostImage[];
+  Hearts: UserId[];
+  Reposts: UserId[];
+  Comments: UserId[];
   _count: {
-    Hearts: number,
-    Reposts: number,
-    Comments: number,
-  },
-  Original?: Post; // 재게시
+    Hearts: number;
+    Reposts: number;
+    Comments: number;
+  };
   Parent?: Post; // 답글
+  Original?: Post; // 재게시
 }
